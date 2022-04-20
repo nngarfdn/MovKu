@@ -63,16 +63,17 @@
         <EditText
             android:id="@+id/edt_address"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/bg_edittext"
             android:hint="Masukan alamat"
+            android:inputType="textMultiLine"
             android:paddingHorizontal="8dp"
             android:textColor="@color/white"
             android:textColorHint="#6FFFFFFF" />
 
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_update"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="32dp"

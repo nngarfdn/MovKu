@@ -17,8 +17,6 @@ class ProfileViewModel @Inject constructor(
 ) : AndroidViewModel(app){
 
     private val pref = SharedPreference(app)
-    val email = pref
-    val user = MutableLiveData<Resource<User>>()
 
     private val statusMessage = MutableLiveData<Resource<String>>()
     val message: LiveData<Resource<String>>
@@ -37,9 +35,9 @@ class ProfileViewModel @Inject constructor(
     fun getUser() = liveData {
         emit(Resource.Loading())
         try {
-            val user = pref.getEmail()?.let { userUseCase.login(it, pref.getPassword()!!) }
-            if (user != null) {
-                emit(Resource.Success(user))
+            val userPref = pref.getEmail()?.let { userUseCase.login(it, pref.getPassword()!!) }
+            if (userPref != null) {
+                emit(Resource.Success(userPref))
             } else {
                 emit(Resource.Error("Error logging in", null))
             }

@@ -18,4 +18,8 @@ class AuthRepositoryImpl(private val authLocalDataSource: AuthLocalDataSource) :
         return authLocalDataSource.update(user)
     }
 
+    override suspend fun getUser(id: Int): User? {
+        return authLocalDataSource.getUser(id)
+    }
+
 }

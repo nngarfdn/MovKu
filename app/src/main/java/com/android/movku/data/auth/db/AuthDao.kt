@@ -13,13 +13,10 @@ interface AuthDao {
 
     @Update
     suspend fun updateUser(user: User): Int
-//
-//    @Query("SELECT * FROM user_table")
-//    suspend fun getAllUser(): List<User>
-//
-//    @Query("SELECT * FROM user_table WHERE id = :id")
-//    suspend fun getUserById(id: Int): User
-//
+
+    @Query("SELECT * FROM user_table WHERE id = :id")
+    suspend fun getUserById(id: Int): User
+
 //    @Query("SELECT EXISTS (SELECT 1 FROM user_table WHERE email = :email)")
 //    suspend fun isExists(email: String): Boolean
 }

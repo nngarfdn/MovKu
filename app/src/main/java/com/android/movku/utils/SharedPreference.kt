@@ -36,6 +36,10 @@ class SharedPreference(context: Context) {
         return sharedPreference.getString("username","")
     }
 
+    fun getId(): Int?{
+        return sharedPreference.getInt("id",0)
+    }
+
     @SuppressLint("CommitPrefEdits")
     fun clearUsername(){
         val editor = sharedPreference.edit()

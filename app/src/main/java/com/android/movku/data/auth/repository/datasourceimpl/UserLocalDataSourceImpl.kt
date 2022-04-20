@@ -18,4 +18,8 @@ class UserLocalDataSourceImpl(private val userDao: AuthDao): AuthLocalDataSource
         return userDao.updateUser(user)
     }
 
+    override suspend fun getUser(id: Int): User {
+        return userDao.getUserById(id)
+    }
+
 }

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.android.movku.R
+import com.android.movku.data.auth.model.User
 import com.android.movku.databinding.ActivityProfileBinding
 import com.android.movku.presentation.auth.login.LoginActivity
 import com.android.movku.utils.Resource
@@ -39,15 +40,52 @@ class ProfileActivity : AppCompatActivity() {
                 val dialog: androidx.appcompat.app.AlertDialog = builder.create()
                 dialog.show()
             }
+
+            btnUpdate.setOnClickListener {
+                val email = edtEmail.text.toString()
+                val username = edtUsername.text.toString()
+                val birthday = edtBirthDate.text.toString()
+                val address = edtAddress.text.toString()
+                val user = pref.getId()?.let { it1 ->
+                    pref.getPassword()?.let { it2 ->
+                        User(
+                            email = email,
+                            username = username,
+                            birthDate = birthday,
+                            address = address,
+                            id = it1,
+                            password = it2
+                        )
+                    }
+                }
+                user?.let { it1 -> viewModel.updateUser(it1) }
+            }
         }
 
         observeUser()
+        observeMessage()
+    }
+
+    private fun observeMessage() {
+        viewModel.message.observe(this) {
+            when (it) {
+                is Resource.Success -> {
+                    Toast.makeText(this, it.data, Toast.LENGTH_SHORT).show()
+                    onBackPressed()
+                }
+                is Resource.Error -> {
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                }
+                else -> {}
+            }
+        }
     }
 
     private fun observeUser() {
-        viewModel.user.observe(this){ response ->
+        viewModel.getUser().observe(this){ response ->
             when(response){
                 is Resource.Success -> {
+
                     binding.apply {
                         response.data?.apply {
                             edtUsername.setText(username)
