@@ -24,6 +24,10 @@ class SharedPreference(context: Context) {
         return sharedPreference.getBoolean("login_status", false)
     }
 
+    fun getUsername(): String?{
+        return sharedPreference.getString("username","")
+    }
+
     @SuppressLint("CommitPrefEdits")
     fun clearUsername(){
         val editor = sharedPreference.edit()

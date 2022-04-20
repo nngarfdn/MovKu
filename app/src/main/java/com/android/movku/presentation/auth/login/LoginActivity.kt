@@ -21,10 +21,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        if (pref.isLoggedIn()) {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
+
         binding.apply {
             btnLogin.setOnClickListener {
                 val email = edtEmail.text.toString()

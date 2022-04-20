@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -13,8 +14,10 @@ import com.android.movku.R
 import com.android.movku.data.movie.model.Movie
 import com.android.movku.databinding.ActivityMainBinding
 import com.android.movku.presentation.adapter.MovieAdapter
+import com.android.movku.presentation.auth.login.LoginActivity
 import com.android.movku.presentation.auth.register.RegisterActivity
 import com.android.movku.utils.Resource
+import com.android.movku.utils.SharedPreference
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -23,13 +26,19 @@ class MainActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val viewModel : MovieViewModel by viewModels()
+    val pref by lazy { SharedPreference(this) }
     @Inject
     lateinit var movieAdapter: MovieAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        if (!pref.isLoggedIn()) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
         binding.apply {
+            ("Halloo, " + pref.getUsername()).also { txtUname.text = it }
             rvMovie.apply {
                 adapter = movieAdapter
                 layoutManager = GridLayoutManager(context, 2)
@@ -43,7 +52,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-//        startActivity(Intent(this, RegisterActivity::class.java))
         viewModel.getMoviePopular()
         viewModel.getMovieById(634649)
         observeMovies()
@@ -92,4 +100,5 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
+
 }
