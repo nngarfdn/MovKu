@@ -13,7 +13,7 @@ class RegisterViewModel @Inject constructor(
     private val userUseCase: AuthUseCase
 ) : ViewModel() {
 
-    val user = MutableLiveData<Resource<User>>()
+
     private val statusMessage = MutableLiveData<Resource<String>>()
     val message: LiveData<Resource<String>>
         get() = statusMessage
@@ -27,19 +27,6 @@ class RegisterViewModel @Inject constructor(
         }
     }
 
-    fun login(email: String, password: String) = liveData {
-        emit(Resource.Loading())
-        try {
-            val user = userUseCase.login(email, password)
-            if (user != null) {
-                emit(Resource.Success(user))
-            } else {
-                emit(Resource.Error("Error logging in", null))
-            }
-        } catch (e: Exception) {
-            emit(Resource.Error(e.message ?: "Error logging in", null))
-        }
-    }
 
 
 }

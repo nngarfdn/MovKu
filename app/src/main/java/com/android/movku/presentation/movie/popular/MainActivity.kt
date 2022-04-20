@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        startActivity(Intent(this, RegisterActivity::class.java))
+//        startActivity(Intent(this, RegisterActivity::class.java))
         viewModel.getMoviePopular()
         viewModel.getMovieById(634649)
         observeMovies()

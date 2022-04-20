@@ -39,17 +39,6 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
         }
-        viewModel.login("test1@email.com","1").observe(this){ response ->
-            when(response){
-                is Resource.Success -> {
-                    Toast.makeText(this, response.data?.email.toString(), Toast.LENGTH_LONG).show()
-                }
-                is Resource.Error -> {
-                    Log.e("errorlog", "onCreate: ${response.message}", )
-                    Toast.makeText(this, response.message, Toast.LENGTH_LONG).show()
-                }
-                else -> {}
-            }
-        }
+
     }
 }

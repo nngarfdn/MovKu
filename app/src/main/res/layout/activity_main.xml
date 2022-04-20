@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/backgroud"
     tools:context=".presentation.movie.popular.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_movie"
         android:layout_width="match_parent"
+        android:layout_marginStart="10dp"
         android:layout_height="wrap_content"/>
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer"
