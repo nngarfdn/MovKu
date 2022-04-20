@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.android.movku.R
 import com.android.movku.databinding.ActivityLoginBinding
+import com.android.movku.presentation.auth.register.RegisterActivity
 import com.android.movku.presentation.movie.popular.MainActivity
 import com.android.movku.utils.Resource
 import com.android.movku.utils.SharedPreference
@@ -27,6 +28,9 @@ class LoginActivity : AppCompatActivity() {
                 val email = edtEmail.text.toString()
                 val password = edtPassword.text.toString()
                 login(email, password)
+            }
+            btnRegister.setOnClickListener {
+                startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
             }
         }
     }

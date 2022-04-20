@@ -24,6 +24,14 @@ class SharedPreference(context: Context) {
         return sharedPreference.getBoolean("login_status", false)
     }
 
+    fun getEmail(): String? {
+        return sharedPreference.getString("email","")
+    }
+
+    fun getPassword(): String? {
+        return sharedPreference.getString("password","")
+    }
+
     fun getUsername(): String?{
         return sharedPreference.getString("username","")
     }

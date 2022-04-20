@@ -14,4 +14,8 @@ class AuthRepositoryImpl(private val authLocalDataSource: AuthLocalDataSource) :
         return authLocalDataSource.login(email, password)
     }
 
+    override suspend fun update(user: User): Int? {
+        return authLocalDataSource.update(user)
+    }
+
 }

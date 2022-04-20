@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Daftar"
+            android:text="Edit Profile"
             android:textColor="@color/white"
             android:textSize="24sp" />
 
@@ -50,53 +50,46 @@
             android:textColorHint="#6FFFFFFF" />
 
         <EditText
-            android:id="@+id/edt_password"
+            android:id="@+id/edt_birth_date"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/bg_edittext"
-            android:hint="Masukan password"
+            android:hint="Masukan tanggal lahir"
             android:paddingHorizontal="8dp"
             android:textColor="@color/white"
-            android:inputType="textPassword"
             android:textColorHint="#6FFFFFFF" />
 
         <EditText
-            android:id="@+id/edt_password_confirm"
+            android:id="@+id/edt_address"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/bg_edittext"
-            android:hint="Ulangi password"
+            android:hint="Masukan alamat"
             android:paddingHorizontal="8dp"
             android:textColor="@color/white"
-            android:inputType="textPassword"
             android:textColorHint="#6FFFFFFF" />
 
         <Button
-            android:id="@+id/btn_register"
+            android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="32dp"
             android:background="@drawable/bg_btn_gradient"
-            android:text="Daftar"
+            android:text="Update"
             android:textAllCaps="false"
             android:textColor="@color/white" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#6FFFFFFF"
-            android:layout_marginTop="24dp"
-            android:text="atau"/>
-
-        <TextView
-            android:id="@+id/btn_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:layout_marginTop="8dp"
-            android:text="Masuk Sekarang"/>
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_edittext"
+            android:text="Keluar"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
 
 
     </LinearLayout>

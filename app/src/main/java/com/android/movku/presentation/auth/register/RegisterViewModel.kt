@@ -21,7 +21,7 @@ class RegisterViewModel @Inject constructor(
     fun insertUser(user: User) = viewModelScope.launch {
         val newRow = userUseCase.insertUser(user) ?: -1
         if (newRow > -1) {
-            statusMessage.value = Resource.Success("User inserted successfully")
+            statusMessage.value = Resource.Success("register successfully")
         } else {
             statusMessage.value = Resource.Error("Error inserting user", null)
         }

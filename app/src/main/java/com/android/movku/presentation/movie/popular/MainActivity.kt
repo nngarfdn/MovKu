@@ -16,6 +16,7 @@ import com.android.movku.databinding.ActivityMainBinding
 import com.android.movku.presentation.adapter.MovieAdapter
 import com.android.movku.presentation.auth.login.LoginActivity
 import com.android.movku.presentation.auth.register.RegisterActivity
+import com.android.movku.presentation.profile.ProfileActivity
 import com.android.movku.utils.Resource
 import com.android.movku.utils.SharedPreference
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity() {
                 if (this.itemDecorationCount == 0)
                     addItemDecoration(dividerItemDecoration)
             }
+            imgLogout.setOnClickListener { startActivity(Intent(this@MainActivity, ProfileActivity::class.java)) }
         }
 
         viewModel.getMoviePopular()
