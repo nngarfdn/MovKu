@@ -1,9 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroud"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".presentation.movie.detail.DetailMovieActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:id="@+id/img_movie_bg"
+        android:src="@drawable/sample"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="#E6181A20"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_merch"
+        android:layout_width="250dp"
+        android:layout_height="450dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:theme="@style/Theme.MaterialComponents.Light"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginVertical="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_movie"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/sample" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_merch">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/backgroud"
+            app:cardCornerRadius="16dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_detail">
+
+                <TextView
+                    android:id="@+id/txt_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Title"
+                    android:textSize="24sp"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Overview"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"/>
+                <TextView
+                    android:id="@+id/txt_overview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Lorem ipsum"
+
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </ScrollView>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
