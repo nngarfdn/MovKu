@@ -1,8 +1,8 @@
-package com.android.movku.domain.movie.usecase
+package com.android.movku.domain.movie
 
 import com.android.movku.data.movie.model.Movie
 import com.android.movku.data.movie.model.MovieList
-import com.android.movku.domain.movie.repository.MovieRepository
+import com.android.movku.domain.movie.MovieRepository
 import com.android.movku.utils.Resource
 
 class MovieUseCase(private val repository: MovieRepository) {

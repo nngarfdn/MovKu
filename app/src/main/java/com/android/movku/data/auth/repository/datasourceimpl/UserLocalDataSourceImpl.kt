@@ -10,4 +10,8 @@ class UserLocalDataSourceImpl(private val userDao: AuthDao): AuthLocalDataSource
         return userDao.insertUser(user)
     }
 
+    override suspend fun login(email: String, password: String): User {
+        return userDao.loginUser(email, password)
+    }
+
 }

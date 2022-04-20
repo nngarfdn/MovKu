@@ -8,6 +8,10 @@ interface AuthDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUser(user: User): Long
 
+    //is registered user
+    @Query("SELECT * FROM user_table WHERE email LIKE :email AND password LIKE :password")
+    fun loginUser(email: String, password: String): User
+
 //    @Update
 //    suspend fun updateUser(user: User): Int
 //

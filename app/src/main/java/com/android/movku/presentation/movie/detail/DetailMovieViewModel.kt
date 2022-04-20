@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.android.movku.data.movie.model.Movie
-import com.android.movku.domain.movie.usecase.MovieUseCase
+import com.android.movku.domain.movie.MovieUseCase
 import com.android.movku.utils.Resource
 import com.android.movku.utils.isNetworkAvailable
 import dagger.hilt.android.lifecycle.HiltViewModel

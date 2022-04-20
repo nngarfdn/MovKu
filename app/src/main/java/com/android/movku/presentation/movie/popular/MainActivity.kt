@@ -1,5 +1,6 @@
 package com.android.movku.presentation.movie.popular
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,6 +13,7 @@ import com.android.movku.R
 import com.android.movku.data.movie.model.Movie
 import com.android.movku.databinding.ActivityMainBinding
 import com.android.movku.presentation.adapter.MovieAdapter
+import com.android.movku.presentation.auth.register.RegisterActivity
 import com.android.movku.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -41,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-//        startActivity(Intent(this, RegisterActivity::class.java))
+        startActivity(Intent(this, RegisterActivity::class.java))
         viewModel.getMoviePopular()
         viewModel.getMovieById(634649)
         observeMovies()

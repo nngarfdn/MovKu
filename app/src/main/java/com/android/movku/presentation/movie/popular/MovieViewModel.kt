@@ -1,16 +1,12 @@
 package com.android.movku.presentation.movie.popular
 
 import android.app.Application
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.os.Build
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.android.movku.data.movie.model.Movie
 import com.android.movku.data.movie.model.MovieList
-import com.android.movku.domain.movie.usecase.MovieUseCase
+import com.android.movku.domain.movie.MovieUseCase
 import com.android.movku.utils.Resource
 import com.android.movku.utils.isNetworkAvailable
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -15,7 +15,6 @@ interface TMDBService {
     @GET("movie/popular")
     suspend fun getPopularMovies(@Query("api_key") apiKey: String?= BuildConfig.API_KEY): Response<MovieList>
 
-    //get by id
     @GET("movie/{id}")
     suspend fun getMovieById( @Path("id") id: Int,@Query("api_key") apiKey: String?= BuildConfig.API_KEY): Response<Movie>
 

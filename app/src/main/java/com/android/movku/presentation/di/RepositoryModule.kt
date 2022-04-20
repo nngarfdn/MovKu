@@ -2,12 +2,10 @@ package com.android.movku.presentation.di
 
 import com.android.movku.data.auth.repository.AuthRepositoryImpl
 import com.android.movku.data.auth.repository.datasource.AuthLocalDataSource
-import com.android.movku.data.core.api.TMDBService
 import com.android.movku.data.movie.MovieRepositoryImpl
 import com.android.movku.data.movie.repository.datasource.MovieRemoteDataSource
-import com.android.movku.data.movie.repository.datasourceimpl.MovieRemoteDataSourceImpl
-import com.android.movku.domain.auth.repository.AuthRepository
-import com.android.movku.domain.movie.repository.MovieRepository
+import com.android.movku.domain.auth.AuthRepository
+import com.android.movku.domain.movie.MovieRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,7 +30,7 @@ class RepositoryModule {
     @Provides
     fun provideAuthRepository(
         authLocalDataSource: AuthLocalDataSource
-    ): AuthRepository{
+    ): AuthRepository {
         return AuthRepositoryImpl(authLocalDataSource)
     }
 

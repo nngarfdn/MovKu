@@ -18,6 +18,7 @@ class DataBaseModule {
     fun provideNewsDatabase(app: Application): MovKuDatabase {
         return Room.databaseBuilder(app, MovKuDatabase::class.java, "news_db")
             .fallbackToDestructiveMigration()
+            .allowMainThreadQueries()
             .build()
     }
 

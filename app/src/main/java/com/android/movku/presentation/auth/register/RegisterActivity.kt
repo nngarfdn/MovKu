@@ -2,6 +2,7 @@ package com.android.movku.presentation.auth.register
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -22,7 +23,9 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        viewModel.insertUser(User(Random(1000).nextInt(), "test","test@email.com","1"))
+//        viewModel.insertUser(User(Random(1000).nextInt(), "test","test@email.com","1"))
+        viewModel.insertUser(User(10, "test","test1@email.com","1"))
+
         viewModel.message.observe(this){ response ->
             when(response){
                 is Resource.Success -> {
@@ -34,6 +37,18 @@ class RegisterActivity : AppCompatActivity() {
                 else -> {
                     Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show()
                 }
+            }
+        }
+        viewModel.login("test1@email.com","1").observe(this){ response ->
+            when(response){
+                is Resource.Success -> {
+                    Toast.makeText(this, response.data?.email.toString(), Toast.LENGTH_LONG).show()
+                }
+                is Resource.Error -> {
+                    Log.e("errorlog", "onCreate: ${response.message}", )
+                    Toast.makeText(this, response.message, Toast.LENGTH_LONG).show()
+                }
+                else -> {}
             }
         }
     }

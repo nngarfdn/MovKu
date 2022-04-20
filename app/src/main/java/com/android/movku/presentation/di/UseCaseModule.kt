@@ -1,9 +1,9 @@
 package com.android.movku.presentation.di
 
-import com.android.movku.domain.auth.repository.AuthRepository
-import com.android.movku.domain.auth.usecase.InsertUserUseCase
-import com.android.movku.domain.movie.repository.MovieRepository
-import com.android.movku.domain.movie.usecase.MovieUseCase
+import com.android.movku.domain.auth.AuthRepository
+import com.android.movku.domain.auth.AuthUseCase
+import com.android.movku.domain.movie.MovieRepository
+import com.android.movku.domain.movie.MovieUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,7 +26,7 @@ class UseCaseModule {
     @ViewModelScoped
     fun provideInsertUserUsecase(
         repository: AuthRepository
-    ): InsertUserUseCase {
-        return InsertUserUseCase(repository)
+    ): AuthUseCase {
+        return AuthUseCase(repository)
     }
 }

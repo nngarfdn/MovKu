@@ -1,4 +1,4 @@
-package com.android.movku.domain.movie.repository
+package com.android.movku.domain.movie
 
 import com.android.movku.data.movie.model.Movie
 import com.android.movku.data.movie.model.MovieList

@@ -4,13 +4,13 @@ package com.android.movku.data.movie
 import com.android.movku.data.movie.model.Movie
 import com.android.movku.data.movie.model.MovieList
 import com.android.movku.data.movie.repository.datasource.MovieRemoteDataSource
-import com.android.movku.domain.movie.repository.MovieRepository
+import com.android.movku.domain.movie.MovieRepository
 import com.android.movku.utils.Resource
 import retrofit2.Response
 
 class MovieRepositoryImpl(
         private val movieRemoteDataSource: MovieRemoteDataSource
-):MovieRepository {
+): MovieRepository {
 
     override suspend fun getMovies(): Resource<MovieList> {
         return responseToResource(movieRemoteDataSource.getMovies())
