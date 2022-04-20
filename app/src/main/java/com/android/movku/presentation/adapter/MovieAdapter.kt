@@ -1,5 +1,6 @@
 package com.android.movku.presentation.adapter
 
+import android.content.Intent
 import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.android.movku.data.movie.model.Movie
 import com.android.movku.databinding.ItemMovieBinding
+import com.android.movku.presentation.movie.detail.DetailMovieActivity
 import com.bumptech.glide.Glide
 
 
@@ -47,8 +49,12 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.RecentAdapterViewHolder>()
                 .load("https://image.tmdb.org/t/p/w500"+data.posterPath)
                 .into(imgMovie)
 
-            val onItemClickListener :((Movie)->Unit)?=null
-            root.setOnClickListener { onItemClickListener?.invoke(data) }
+            root.setOnClickListener {
+                val ctx = holder.itemView.context
+                val intent = Intent(ctx, DetailMovieActivity::class.java)
+                intent.putExtra("id", data.id)
+                ctx.startActivity(intent)
+            }
         }
     }
 

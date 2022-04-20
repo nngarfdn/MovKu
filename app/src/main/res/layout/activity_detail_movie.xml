@@ -9,6 +9,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".presentation.movie.detail.DetailMovieActivity">
 
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -34,8 +35,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
+            android:orientation="vertical"
             android:layout_height="match_parent">
 
             <ImageView
@@ -45,7 +47,7 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/sample" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 

@@ -55,26 +55,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.getMoviePopular()
-        viewModel.getMovieById(634649)
         observeMovies()
-        observeMovieDetail()
+
     }
 
-    private fun observeMovieDetail() {
-        viewModel.movieDetail.observe(this) {
-            when (it) {
-                is Resource.Loading -> {
-                    Log.d("detailmov", "Loading")
-                }
-                is Resource.Success -> {
-                    Log.d("detailmov", "Success ${it.data?.title}")
-                }
-                is Resource.Error -> {
-                    Log.d("detailmov", "Error")
-                }
-            }
-        }
-    }
+
 
     private fun observeMovies() {
         viewModel.movieList.observe(this) { response ->
