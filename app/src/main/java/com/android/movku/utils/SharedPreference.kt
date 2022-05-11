@@ -36,7 +36,7 @@ class SharedPreference(context: Context) {
         return sharedPreference.getString("username","")
     }
 
-    fun getId(): Int?{
+    fun getId(): Int {
         return sharedPreference.getInt("id",0)
     }
 

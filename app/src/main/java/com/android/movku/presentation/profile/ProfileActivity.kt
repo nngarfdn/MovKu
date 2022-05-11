@@ -59,6 +59,7 @@ class ProfileActivity : AppCompatActivity() {
                     }
                 }
                 user?.let { it1 -> viewModel.updateUser(it1) }
+                user?.let { it1 -> pref.saveKey(it1, true) }
             }
         }
 

@@ -56,6 +56,10 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.getMoviePopular()
         observeMovies()
+        viewModel.saveuserName("usernamenyananang")
+        viewModel.getDataStore().observe(this) { uname ->
+            Log.d("uname", uname)
+        }
 
     }
 
@@ -86,6 +90,11 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ("Halloo, " + pref.getUsername()).also { binding.txtUname.text = it }
     }
 
 }
