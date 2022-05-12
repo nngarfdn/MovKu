@@ -2,7 +2,6 @@ package com.android.movku.presentation.movie.popular
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.android.movku.data.movie.model.Movie
 import com.android.movku.data.movie.model.MovieList
 import com.android.movku.domain.movie.MovieUseCase
 import com.android.movku.utils.MovKuDataStoreManager
@@ -28,8 +27,12 @@ class MovieViewModel @Inject constructor(
         }
     }
 
-    fun getDataStore(): LiveData<String> {
+    fun getUsername(): LiveData<String> {
         return dataStoreManager.getUsername().asLiveData()
+    }
+
+    fun getStatusLogin(): LiveData<Boolean> {
+        return dataStoreManager.isLoggedIn().asLiveData()
     }
 
     fun getMoviePopular() = viewModelScope.launch(Dispatchers.IO) {

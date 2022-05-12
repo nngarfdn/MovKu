@@ -16,8 +16,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ProfileActivity : AppCompatActivity() {
     private val binding by lazy { ActivityProfileBinding.inflate(layoutInflater) }
-    val pref by lazy { SharedPreference(this) }
     private val viewModel by viewModels<ProfileViewModel>()
+    private var userId = -1
+    private var email = ""
+    private var password = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -29,8 +31,7 @@ class ProfileActivity : AppCompatActivity() {
                 builder.setTitle("Logout")
                 builder.setMessage("Are you sure you want to logout?")
                 builder.setPositiveButton("Yes") { dialog, which ->
-                    //clear shared preference
-                    pref.clearUsername()
+                    viewModel.clearData()
                     startActivity(Intent(this@ProfileActivity, LoginActivity::class.java))
                     finish()
                 }
@@ -46,25 +47,31 @@ class ProfileActivity : AppCompatActivity() {
                 val username = edtUsername.text.toString()
                 val birthday = edtBirthDate.text.toString()
                 val address = edtAddress.text.toString()
-                val user = pref.getId()?.let { it1 ->
-                    pref.getPassword()?.let { it2 ->
-                        User(
-                            email = email,
-                            username = username,
-                            birthDate = birthday,
-                            address = address,
-                            id = it1,
-                            password = it2
-                        )
-                    }
-                }
-                user?.let { it1 -> viewModel.updateUser(it1) }
-                user?.let { it1 -> pref.saveKey(it1, true) }
+                val user = User( email = email, username = username, birthDate = birthday,
+                        address = address, id = userId, password = password)
+
+                user.let { it1 -> viewModel.updateUser(it1) }
+                user.let { it1 -> viewModel.saveUser(it1, true) }
             }
         }
 
-        observeUser()
+        observeUserId()
+        observeEmailPass()
         observeMessage()
+    }
+
+    private fun observeUserId() {
+        viewModel.getUserId().observe(this) { id ->
+            userId = id
+        }
+    }
+
+    private fun observeEmailPass() {
+        viewModel.getEmailPassword().observe(this) { emailpas ->
+            email = emailpas[0]
+            password = emailpas[1]
+            observeUser(emailpas[0], emailpas[1])
+        }
     }
 
     private fun observeMessage() {
@@ -82,9 +89,9 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
-    private fun observeUser() {
-        viewModel.getUser().observe(this){ response ->
-            when(response){
+    private fun observeUser(email: String, password: String) {
+        viewModel.getUser(email, password).observe(this) { response ->
+            when (response) {
                 is Resource.Success -> {
 
                     binding.apply {
@@ -99,7 +106,7 @@ class ProfileActivity : AppCompatActivity() {
                 is Resource.Error -> {
                     Toast.makeText(this, response.message, Toast.LENGTH_LONG).show()
                 }
-                else -> { }
+                else -> {}
             }
         }
     }

@@ -12,13 +12,13 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class MovKuDataStoreManager @Inject constructor(val context: Context) {
-    suspend fun setUser(user: User) {
+    suspend fun setUser(user: User, isLoggedIn: Boolean) {
         context.counterDataStore.edit { preferences ->
             preferences[EMAIL_KEY] = user.email
             preferences[PASSWORD_KEY] = user.password
             preferences[USERNAME_KEY] = user.username
             preferences[ID_KEY] = user.id
-            preferences[LOGINSTATUS_KEY] = true
+            preferences[LOGINSTATUS_KEY] = isLoggedIn
         }
     }
 
@@ -27,6 +27,9 @@ class MovKuDataStoreManager @Inject constructor(val context: Context) {
             preferences[USERNAME_KEY] = username
         }
     }
+
+
+
 
     fun getUsername(): Flow<String> {
         return context.counterDataStore.data.map { preferences ->
@@ -40,15 +43,9 @@ class MovKuDataStoreManager @Inject constructor(val context: Context) {
         }
     }
 
-    fun getEmail(): Flow<String> {
+    fun getEmailPassword(): Flow<List<String>>{
         return context.counterDataStore.data.map { preferences ->
-            preferences[EMAIL_KEY] ?: ""
-        }
-    }
-
-    fun getPassword(): Flow<String> {
-        return context.counterDataStore.data.map { preferences ->
-            preferences[PASSWORD_KEY] ?: ""
+            listOf(preferences[EMAIL_KEY] ?: "", preferences[PASSWORD_KEY] ?: "")
         }
     }
 

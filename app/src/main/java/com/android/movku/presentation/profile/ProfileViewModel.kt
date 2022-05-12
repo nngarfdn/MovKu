@@ -4,24 +4,38 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.android.movku.data.auth.model.User
 import com.android.movku.domain.auth.AuthUseCase
+import com.android.movku.utils.MovKuDataStoreManager
 import com.android.movku.utils.Resource
 import com.android.movku.utils.SharedPreference
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val app: Application,
-    private val userUseCase: AuthUseCase
+    private val userUseCase: AuthUseCase,
+    private val dataStoreManager: MovKuDataStoreManager
 ) : AndroidViewModel(app){
 
-    private val pref = SharedPreference(app)
 
     private val statusMessage = MutableLiveData<Resource<String>>()
     val message: LiveData<Resource<String>>
         get() = statusMessage
 
+    fun saveUser(user: User, isLoggedIn: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            dataStoreManager.setUser(user, isLoggedIn)
+        }
+    }
+
+    fun getEmailPassword(): LiveData<List<String>> = dataStoreManager.getEmailPassword().asLiveData()
+    fun getUserId(): LiveData<Int> = dataStoreManager.getId().asLiveData()
+
+    fun clearData() {
+        viewModelScope.launch { dataStoreManager.clearData() }
+    }
 
     fun updateUser(user: User) = viewModelScope.launch {
         val newRow = userUseCase.update(user) ?: -1
@@ -32,10 +46,10 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    fun getUser() = liveData {
+    fun getUser(email: String, password: String) = liveData {
         emit(Resource.Loading())
         try {
-            val userPref = pref.getEmail()?.let { userUseCase.login(it, pref.getPassword()!!) }
+            val userPref = userUseCase.login(email, password)
             if (userPref != null) {
                 emit(Resource.Success(userPref))
             } else {

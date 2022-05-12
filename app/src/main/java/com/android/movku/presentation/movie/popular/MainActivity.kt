@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -15,10 +14,8 @@ import com.android.movku.data.movie.model.Movie
 import com.android.movku.databinding.ActivityMainBinding
 import com.android.movku.presentation.adapter.MovieAdapter
 import com.android.movku.presentation.auth.login.LoginActivity
-import com.android.movku.presentation.auth.register.RegisterActivity
 import com.android.movku.presentation.profile.ProfileActivity
 import com.android.movku.utils.Resource
-import com.android.movku.utils.SharedPreference
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -27,19 +24,14 @@ class MainActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val viewModel : MovieViewModel by viewModels()
-    val pref by lazy { SharedPreference(this) }
     @Inject
     lateinit var movieAdapter: MovieAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        if (!pref.isLoggedIn()) {
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }
+
         binding.apply {
-            ("Halloo, " + pref.getUsername()).also { txtUname.text = it }
             rvMovie.apply {
                 adapter = movieAdapter
                 layoutManager = GridLayoutManager(context, 2)
@@ -54,15 +46,28 @@ class MainActivity : AppCompatActivity() {
             imgLogout.setOnClickListener { startActivity(Intent(this@MainActivity, ProfileActivity::class.java)) }
         }
 
+        observeLoginStatus()
+        observeUsername()
         viewModel.getMoviePopular()
         observeMovies()
-        viewModel.saveuserName("usernamenyananang")
-        viewModel.getDataStore().observe(this) { uname ->
-            Log.d("uname", uname)
-        }
 
     }
 
+    private fun observeLoginStatus() {
+        viewModel.getStatusLogin().observe(this) { isLoggedIn ->
+            if(!isLoggedIn) {
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+            }
+        }
+    }
+
+    private fun observeUsername() {
+        viewModel.getUsername().observe(this) { uname ->
+            Log.d("uname", uname)
+            ("Halloo, $uname").also { binding.txtUname.text = it }
+        }
+    }
 
 
     private fun observeMovies() {
@@ -92,9 +97,5 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        ("Halloo, " + pref.getUsername()).also { binding.txtUname.text = it }
-    }
 
 }
