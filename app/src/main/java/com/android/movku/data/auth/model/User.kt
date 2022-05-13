@@ -1,5 +1,6 @@
 package com.android.movku.data.auth.model
 
+import android.net.Uri
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
@@ -18,5 +19,7 @@ data class User(
     @SerializedName("birth_date")
     var birthDate: String="",
     @SerializedName("address")
-    var address: String=""
+    var address: String="",
+    @SerializedName("profile_picture")
+    var profilePicture: String?="",
 )

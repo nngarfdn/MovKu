@@ -21,9 +21,11 @@
             android:textSize="24sp" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/iv_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/logo_b_n_w" />
 
         <EditText
