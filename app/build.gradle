@@ -24,8 +24,8 @@ android {
         versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String","API_KEY",API_KEY)
-        buildConfigField("String","BASE_URL",BASE_URL)
+        buildConfigField("String", "API_KEY", API_KEY)
+        buildConfigField("String", "BASE_URL", BASE_URL)
     }
 
     signingConfigs {
@@ -38,27 +38,43 @@ android {
     }
 
     buildTypes {
-        buildTypes {
-            release {
-                versionNameSuffix '-release'
-                minifyEnabled true
-                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-                multiDexEnabled true
-                shrinkResources true
-                crunchPngs true
-                ext.enableCrashlytics = true
-                signingConfig signingConfigs.release
-            }
-            debug {
-                debuggable true
-                minifyEnabled false
-                shrinkResources false
-                crunchPngs false
-                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-                ext.enableCrashlytics = false
-                versionNameSuffix '-staging'
-                signingConfig signingConfigs.release
-            }
+
+        release {
+            versionNameSuffix '-release'
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            multiDexEnabled true
+            shrinkResources true
+            crunchPngs true
+            ext.enableCrashlytics = true
+            signingConfig signingConfigs.release
+        }
+        debug {
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+            crunchPngs false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            ext.enableCrashlytics = false
+            versionNameSuffix '-staging'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    flavorDimensions 'version'
+    productFlavors {
+        production {
+            //network config for production
+            dimension 'version'
+            buildConfigField("String", "API_KEY", API_KEY)
+            buildConfigField("String", "BASE_URL", BASE_URL)
+
+        }
+        development {
+            //network config for development
+            dimension 'version'
+            buildConfigField("String", "API_KEY", API_KEY)
+            buildConfigField("String", "BASE_URL", BASE_URL)
         }
     }
 
