@@ -21,17 +21,56 @@ android {
         minSdk 21
         targetSdk 32
         versionCode 1
-        versionName "1.0"
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String","API_KEY",API_KEY)
         buildConfigField("String","BASE_URL",BASE_URL)
     }
 
-    buildTypes {
+    signingConfigs {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            storeFile file('movku_key.jks')
+            storePassword "katasandi"
+            keyAlias 'key0'
+            keyPassword "katasandi"
+        }
+    }
+
+    buildTypes {
+        buildTypes {
+            release {
+                versionNameSuffix '-release'
+                minifyEnabled true
+                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+                multiDexEnabled true
+                shrinkResources true
+                crunchPngs true
+                ext.enableCrashlytics = true
+                signingConfig signingConfigs.release
+            }
+            debug {
+                debuggable true
+                minifyEnabled false
+                shrinkResources false
+                crunchPngs false
+                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+                ext.enableCrashlytics = false
+                versionNameSuffix '-staging'
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def fileName = "Movku - V${variant.versionName}}.apk"
+            outputFileName = fileName
         }
     }
     compileOptions {
