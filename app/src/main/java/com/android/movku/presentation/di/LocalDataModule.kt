@@ -17,7 +17,6 @@ class LocalDataModule {
     fun provideLocalDataSource(articleDAO: AuthDao):AuthLocalDataSource{
       return UserLocalDataSourceImpl(articleDAO)
     }
-
 }
 
 

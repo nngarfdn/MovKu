@@ -66,15 +66,12 @@ android {
         production {
             //network config for production
             dimension 'version'
-            buildConfigField("String", "API_KEY", API_KEY)
-            buildConfigField("String", "BASE_URL", BASE_URL)
+
 
         }
         development {
             //network config for development
             dimension 'version'
-            buildConfigField("String", "API_KEY", API_KEY)
-            buildConfigField("String", "BASE_URL", BASE_URL)
         }
     }
 
@@ -161,5 +158,9 @@ dependencies {
 
     //datastore
     implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    //chucker
+    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
 
 }
