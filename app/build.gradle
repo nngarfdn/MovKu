@@ -20,8 +20,8 @@ android {
         applicationId "com.android.movku"
         minSdk 21
         targetSdk 32
-        versionCode 1
-        versionName "1.1"
+        versionCode 12
+        versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "API_KEY", API_KEY)
@@ -41,6 +41,7 @@ android {
 
         release {
             versionNameSuffix '-release'
+            debuggable false
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             multiDexEnabled true
@@ -63,15 +64,20 @@ android {
 
     flavorDimensions 'version'
     productFlavors {
-        production {
-            //network config for production
+        Production {
             dimension 'version'
-
+            manifestPlaceholders = [
+                    appIcon: "@mipmap/ic_release",
+                    appIconRound: "@mipmap/ic_release_round",
+            ]
 
         }
-        development {
-            //network config for development
+        Development {
             dimension 'version'
+            manifestPlaceholders = [
+                    appIcon: "@mipmap/ic_debug",
+                    appIconRound: "@mipmap/ic_debug_round",
+            ]
         }
     }
 
@@ -107,6 +113,9 @@ dependencies {
     def hilt_version = "2.41"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+
+    testImplementation "androidx.room:room-testing:2.4.2"
 
 
     // optional - Kotlin Extensions and Coroutines support for Room
@@ -162,5 +171,13 @@ dependencies {
     //chucker
     debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
     releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
+
+    //testing
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.2.1"
+    testImplementation "com.google.truth:truth:1.0.1"
+    testImplementation 'androidx.test.ext:junit:1.1.3'
+    testImplementation "org.robolectric:robolectric:4.4"
 
 }
