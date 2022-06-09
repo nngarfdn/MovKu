@@ -122,7 +122,7 @@ class ProfileActivity : AppCompatActivity() {
                     var takeFlags = intent.flags
                     takeFlags =
                         takeFlags and (FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-                    contentResolver.takePersistableUriPermission(result, takeFlags)
+                    result?.let { contentResolver.takePersistableUriPermission(it, takeFlags) }
                 } catch (e: SecurityException) {
                     Log.e("", e.toString())
                 }

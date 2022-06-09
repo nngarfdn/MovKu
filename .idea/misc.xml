@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/compose-model-1653920618047.xml" value="0.25" />
+        <entry key="../../../../layout/compose-model-1653921476977.xml" value="0.22" />
+        <entry key="../../../../layout/compose-model-1654137737191.xml" value="0.19763513513513514" />
+        <entry key="../../../../layout/compose-model-1654151592876.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/divider.xml" value="0.2365" />
         <entry key="app/src/main/res/drawable/bg_btn_gradient.xml" value="0.2365" />
         <entry key="app/src/main/res/drawable/bg_btn_gradient_outline.xml" value="0.2365" />
@@ -13,7 +17,7 @@
         <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.2365" />
         <entry key="app/src/main/res/drawable/logo_b_n_w.xml" value="0.2365" />
         <entry key="app/src/main/res/layout/activity_detail_movie.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.27395833333333336" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.27395833333333336" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.22" />

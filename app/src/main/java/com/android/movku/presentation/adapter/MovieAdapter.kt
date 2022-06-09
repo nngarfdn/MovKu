@@ -18,8 +18,6 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.RecentAdapterViewHolder>()
     inner class RecentAdapterViewHolder(val view: ItemMovieBinding) :
         RecyclerView.ViewHolder(view.root)
 
-
-
     private val diffCallback = object : DiffUtil.ItemCallback<Movie>() {
         override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
             return oldItem.id == newItem.id
