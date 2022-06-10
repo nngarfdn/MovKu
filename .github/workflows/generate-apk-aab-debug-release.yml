@@ -19,7 +19,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -48,10 +47,6 @@ jobs:
       # Run Build Project
       - name: Build gradle project
         run: ./gradlew build
-
-      # Run lint
-      - name: Run Lint
-        run: ./gradlew lint
 
       # Create APK Debug
       - name: Build apk debug project (APK) - ${{ env.main_project_module }} module
@@ -87,3 +82,21 @@ jobs:
         with:
           name: ${{ env.date_today }} - ${{ env.playstore_name }} - ${{ env.repository_name }} - App bundle(s) AAB release generated
           path: ${{ env.main_project_module }}/bundle/release/
+
+  android-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - name: set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: zulu
+          java-version: 11
+          cache: gradle
+      - run: ./gradlew lint
+      - uses: yutailang0119/action-android-lint@v3
+        with:
+          report-path: build/reports/*.xml # Support glob patterns by https://www.npmjs.com/package/@actions/glob
+        continue-on-error: false # If annotations contain error of severity, action-android-lint exit 1.
